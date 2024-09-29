@@ -30,30 +30,30 @@ It also includes instructions on building a Docker image to facilitate the proce
 
 2. **Pull the docker image from docker hub repository.**
    open terminal and run 
-```bash
-`docker pull asherio/knot_res:v2`
-```
+    ```bash
+    `docker pull asherio/knot_res:v2`
+    ```
 
    or alternatively, build the image locally by running
-```bash
-docker build -t knot_res .
-```
+    ```bash
+    docker build -t knot_res .
+    ```
 
 3. **run the image.**
-```bash
-docker container run --dns 127.0.0.1 --mount type=bind,source=<source>,target=/app -it asherio/knot_res:v2 /bin/bash
-```
-open additional terminals using:
-```bash
-docker exec -it <container_id> bash
-```
+    ```bash
+    docker container run --dns 127.0.0.1 --mount type=bind,source=<source>,target=/app -it asherio/knot_res:v2 /bin/bash
+    ```
+  open additional terminals using:
+    ```bash
+    docker exec -it <container_id> bash
+    ```
 
 4. **turn Knot resolver up.**
- if you wish to try the attack on knot resolver, 
- do it by open a new termainal and run
-```bash
-kresd -c /etc/knot-resolver/kresd.conf
-``` 
+   if you wish to try the attack on knot resolver, 
+   do it by open a new termainal and run
+      ```bash
+      kresd -c /etc/knot-resolver/kresd.conf
+      ``` 
 
 5. **turn on the authorative servers, Bind9 resolver (if needed), and loading the zonefiles:**
   everything is as in instructed at shoham's repository: github.com/shohamda/CacheFlushSimulator
@@ -61,26 +61,26 @@ kresd -c /etc/knot-resolver/kresd.conf
 6. **Reproduce the A records Attack**
    - Navigate to the `Reproduction of A Records attack` folder and copy `home.lan.forward` to the docker into nsd_attack_home directory. 
    - next, run the following:
-```bash
-   cd /env/nsd_attack_home
-chmod 777 home.lan.forward
-   ``` 
+      ```bash
+         cd /env/nsd_attack_home
+      chmod 777 home.lan.forward
+      ``` 
 
-In order to load the new zonefile, run in /env/nsd_attack_home :
-```bash
-nsd -c nsd.conf -d -f nsd.db
-```
+    In order to load the new zonefile, run in /env/nsd_attack_home :
+      ```bash
+      nsd -c nsd.conf -d -f nsd.db
+      ```
 
 7. **replicate resolver queries flooding test**, 
 
    - open termainal and run:
-```bash
-resperf -d /env/reproduction/Attack_domains.txt -s 127.0.0.1 -v -m 10000 -C 1000 -q 640000 -r 0 -c 100 -R
-```
+      ```bash
+      resperf -d /env/reproduction/Attack_domains.txt -s 127.0.0.1 -v -m 10000 -C 1000 -q 640000 -r 0 -c 100 -R
+      ```
    - open another terminal and run:
-```bash
-   resperf -d  /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
-```
+      ```bash
+         resperf -d  /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+      ```
 
 ## Requirements
 - Docker
