@@ -1,0 +1,84 @@
+root@e55a9d18506b:/env# resperf -d /env/reproduction/Attack_domains.txt -s 127.0.0.1 -v -m 10000 -C 1000 -q 640000 -r 0 -c 100 -R
+DNS Resolution Performance Testing Tool
+Version 2.11.2
+
+[Status] Command line: resperf -d /env/reproduction/Attack_domains.txt -s 127.0.0.1 -v -m 10000 -C 1000 -q 640000 -r 0 -c 100 -R
+[Status] Sending
+[Status] Ramp-up done, sending constant traffic
+[Status] Fell behind by 1093 queries, ending test at inf qps
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         220302
+  Queries completed:    185580
+  Queries lost:         34722
+  Response codes:       SERVFAIL 119287 (64.28%), NXDOMAIN 66293 (35.72%)
+  Reconnection(s):      0
+  Run time (s):         67.018101
+  Maximum throughput:   10132.000000 qps
+  Lost at that point:   0.00%
+
+
+
+
+
+
+root@e55a9d18506b:/env# resperf -d  /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+DNS Resolution Performance Testing Tool
+Version 2.11.2
+
+[Status] Command line: resperf -d /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+[Status] Sending
+[Status] Ramp-up done, sending constant traffic
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         9999
+  Queries completed:    9672
+  Queries lost:         327
+  Response codes:       NOERROR 2018 (20.86%), SERVFAIL 7654 (79.14%)
+  Reconnection(s):      0
+  Run time (s):         100.000785
+  Maximum throughput:   154.000000 qps
+  Lost at that point:   0.00%
+
+
+
+
+
+
+---------------------------------- Only benign requests after cleaning the cache ------------------------------------------ 
+
+root@e55a9d18506b:/env# rndc flush
+root@e55a9d18506b:/env# rndc reload 
+server reload successful
+
+root@e55a9d18506b:/env# resperf -d  /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+DNS Resolution Performance Testing Tool
+Version 2.11.2
+
+[Status] Command line: resperf -d /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+[Status] Sending
+[Status] Ramp-up done, sending constant traffic
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         9999
+  Queries completed:    9999
+  Queries lost:         0
+  Response codes:       NOERROR 9999 (100.00%)
+  Reconnection(s):      0
+  Run time (s):         100.000256
+  Maximum throughput:   100.000000 qps
+  Lost at that point:   0.00%
+
+
+
+
+

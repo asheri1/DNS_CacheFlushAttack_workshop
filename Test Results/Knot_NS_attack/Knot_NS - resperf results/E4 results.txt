@@ -1,0 +1,48 @@
+root@612e0d275b27:/env# resperf -d /env/reproduction/Attack_domains.txt -s 127.0.0.1 -v -m 10000 -C 1000 -q 640000 -r 0 -c 100 -R
+DNS Resolution Performance Testing Tool
+Version 2.11.2
+
+[Status] Command line: resperf -d /env/reproduction/Attack_domains.txt -s 127.0.0.1 -v -m 10000 -C 1000 -q 640000 -r 0 -c 100 -R
+[Status] Sending
+[Status] Ramp-up done, sending constant traffic
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         999999
+  Queries completed:    926246
+  Queries lost:         73753
+  Response codes:       NOERROR 6622 (0.71%), SERVFAIL 45974 (4.96%), NXDOMAIN 873650 (94.32%)
+  Reconnection(s):      0
+  Run time (s):         136.337502
+  Maximum throughput:   10008.000000 qps
+  Lost at that point:   0.00%
+
+
+
+
+
+
+
+root@612e0d275b27:/env# resperf -d  /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+DNS Resolution Performance Testing Tool
+Version 2.11.2
+
+[Status] Command line: resperf -d /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+[Status] Sending
+[Status] Ramp-up done, sending constant traffic
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         9999
+  Queries completed:    9281
+  Queries lost:         718
+  Response codes:       NOERROR 9281 (100.00%)
+  Reconnection(s):      0
+  Run time (s):         130.020002
+  Maximum throughput:   100.000000 qps
+  Lost at that point:   0.00%
+

@@ -1,0 +1,76 @@
+root@9fbfd7b484c8:/env# resperf -d /env/reproduction/Attack_domains.txt -s 127.0.0.1 -v -m 10000 -C 1000 -q 640000 -r 0 -c 100 -R
+DNS Resolution Performance Testing Tool
+Version 2.11.2
+
+[Status] Command line: resperf -d /env/reproduction/Attack_domains.txt -s 127.0.0.1 -v -m 10000 -C 1000 -q 640000 -r 0 -c 100 -R
+[Status] Sending
+[Status] Ramp-up done, sending constant traffic
+[Status] Fell behind by 1000 queries, ending test at inf qps
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         250676
+  Queries completed:    158878
+  Queries lost:         91798
+  Response codes:       NOERROR 20 (0.01%), SERVFAIL 99502 (62.63%), NXDOMAIN 59356 (37.36%)
+  Reconnection(s):      0
+  Run time (s):         69.042792
+  Maximum throughput:   10066.000000 qps
+  Lost at that point:   0.00%
+
+
+
+
+
+
+
+root@9fbfd7b484c8:/env# resperf -d  /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+DNS Resolution Performance Testing Tool
+Version 2.11.2
+
+[Status] Command line: resperf -d /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+[Status] Sending
+[Status] Ramp-up done, sending constant traffic
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         9999
+  Queries completed:    9136
+  Queries lost:         863
+  Response codes:       NOERROR 1893 (20.72%), SERVFAIL 7243 (79.28%)
+  Reconnection(s):      0
+  Run time (s):         100.000140
+  Maximum throughput:   248.000000 qps
+  Lost at that point:   0.00%
+
+
+
+
+
+root@9fbfd7b484c8:/env# rndc flush
+root@9fbfd7b484c8:/env# rndc reload
+server reload successful
+root@9fbfd7b484c8:/env# resperf -d  /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+DNS Resolution Performance Testing Tool
+Version 2.11.2
+
+[Status] Command line: resperf -d /env/reproduction/Benign_domains.txt -s 127.0.0.1 -v -m 100 -C 1000 -q 640000 -r 0 -c 100 -R
+[Status] Sending
+[Status] Ramp-up done, sending constant traffic
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         9999
+  Queries completed:    9999
+  Queries lost:         0
+  Response codes:       NOERROR 9999 (100.00%)
+  Reconnection(s):      0
+  Run time (s):         100.000155
+  Maximum throughput:   100.000000 qps
+  Lost at that point:   0.00%
