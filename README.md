@@ -4,6 +4,14 @@
 This repository contains materials for reproducing and analyzing a DNS Cache Flush Attack on Knot resolver and Bind9.
 It also includes instructions on building a Docker image to facilitate the process, along with the results of various tests conducted during the research.
 
+---
+
+## Projet overview, analysis and conclusions
+
+Can be evaluated in the presentation link:
+*https://github.com/asheri1/DNS_CacheFlushAttack_workshop/blob/master/Project%20overview%2C%20analysis%2C%20and%20final%20conclusions.pdf*
+
+---
 
 ## Repository Structure
 
